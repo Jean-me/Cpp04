@@ -5,7 +5,7 @@
 
 class Animal
 {
-protected: // 自分と子だけが使える、外部からは隠す
+protected:
     std::string type;
 
 public:
@@ -14,7 +14,7 @@ public:
     Animal &operator=(const Animal &other);
     virtual ~Animal();
 
-    virtual void makeSound() const; // オーバーライド：Polymorphysmを実現できる。親のAnimal型に入っていても、それぞれの子のmakeSoundを再定義して使える
+    virtual void makeSound() const = 0; // Pure virtual function - makes Animal abstract
     std::string getType() const;
 };
 
