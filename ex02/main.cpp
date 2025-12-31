@@ -5,6 +5,7 @@
 
 int main()
 {
+    //小クラスを作ることを前提としたクラスが抽象クラス。インスタンス化できない。今回はAnimalクラスをAbstructに。Dogなどはインスタンスを作れる。
     // This should NOT compile because Animal is now abstract:
     // Animal* test = new Animal();  // ERROR: cannot instantiate abstract class
 
@@ -12,7 +13,7 @@ int main()
     const int arraySize = 4;
     Animal *animals[arraySize];
 
-    // Half Dogs, half Cats
+    // Half Dogs, half Cats　ドッグ２匹　キャット２匹作る
     for (int i = 0; i < arraySize / 2; i++)
     {
         animals[i] = new Dog();
@@ -35,8 +36,8 @@ int main()
         delete animals[i];
     }
 
-    std::cout << "\n=== Testing deep copy ===" << std::endl;
-    Dog *dog1 = new Dog();
+    std::cout << "\n=== Testing deep copy ===" << std::endl;//ディープコピー
+    Dog *dog1 = new Dog();//まず一匹Dogを作る
     dog1->getBrain()->setIdea(0, "I want to chase cats!");
     dog1->getBrain()->setIdea(1, "I love bones!");
 
