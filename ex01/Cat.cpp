@@ -6,14 +6,14 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 19:21:01 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/12/31 19:21:02 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/12/31 19:30:49 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 #include <iostream>
 
-Cat::Cat() : Animal(), brain(new Brain()) {
+Cat::Cat() : brain(new Brain()) {
     type = "Cat";
     std::cout << "Cat default constructor called" << std::endl;
 }

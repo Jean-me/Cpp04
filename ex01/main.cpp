@@ -6,7 +6,7 @@
 /*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/31 19:21:33 by mesasaki          #+#    #+#             */
-/*   Updated: 2025/12/31 19:21:34 by mesasaki         ###   ########.fr       */
+/*   Updated: 2025/12/31 19:45:51 by mesasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ int main() {
     const int arraySize = 4;
     const Animal* animals[arraySize];
 
-    Dog basic;
-    {
-        Dog tmp = basic;
-        std::cout << "dog1 brain: " << tmp.getBrain() << std::endl;
-        std::cout << "dog2 brain: " << basic.getBrain() << std::endl;
-    }
     // Half Dogs, half Cats
     for (int i = 0; i < arraySize / 2; i++) {
         animals[i] = new Dog();//BeainConがDogConよりも先に呼ばれる⇒コンストラクタ本体が実行される前に、すべてのメンバ変数が初期化されている必要がある
@@ -45,13 +39,21 @@ int main() {
         delete animals[i];//destructor呼ばれる
     }
 
-    std::cout << "\n=== Testing deep copy ===" << std::endl;
+    std::cout << "\n=== Testing deep copy (Stack)===" << std::endl;
+    Dog basic;//スタック領域バージョン
+    {
+        Dog tmp = basic;
+        std::cout << "dog1 brain: " << tmp.getBrain() << std::endl;
+        std::cout << "dog2 brain: " << basic.getBrain() << std::endl;
+    }
+    
+    std::cout << "\n=== Testing deep copy (Heap)===" << std::endl;
     Dog* dog1 = new Dog();
     dog1->getBrain()->setIdea(0, "I want to chase cats!");
     dog1->getBrain()->setIdea(1, "I love bones!");
 
     std::cout << "\nCreating dog2 as a copy of dog1..." << std::endl;
-    Dog* dog2 = new Dog(*dog1);//これがDeepCopy、Dogのコピーコンを呼ぶｓ　…Shallow Copyの例；Dog dog2 = dog1;　
+    Dog* dog2 = new Dog(*dog1);//ヒープバージョン　これがDeepCopy、Dogのコピーコンを呼ぶ、 Dog クラスに新たなBrainを作ってあげるコピコンをきちんと実装してればDeepCopyになる
 
     std::cout << "\ndog1 ideas: " << dog1->getBrain()->getIdea(0) << std::endl;
     std::cout << "dog2 ideas: " << dog2->getBrain()->getIdea(0) << std::endl;
