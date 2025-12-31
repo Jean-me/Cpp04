@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mesasaki <mesasaki@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/31 19:21:33 by mesasaki          #+#    #+#             */
+/*   Updated: 2025/12/31 19:21:34 by mesasaki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "Animal.hpp"
 #include "Dog.hpp"
@@ -8,6 +20,12 @@ int main() {
     const int arraySize = 4;
     const Animal* animals[arraySize];
 
+    Dog basic;
+    {
+        Dog tmp = basic;
+        std::cout << "dog1 brain: " << tmp.getBrain() << std::endl;
+        std::cout << "dog2 brain: " << basic.getBrain() << std::endl;
+    }
     // Half Dogs, half Cats
     for (int i = 0; i < arraySize / 2; i++) {
         animals[i] = new Dog();//BeainConがDogConよりも先に呼ばれる⇒コンストラクタ本体が実行される前に、すべてのメンバ変数が初期化されている必要がある
