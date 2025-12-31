@@ -1,23 +1,26 @@
+# I don’t want to set the world on fire
+NAME = ex01
+SRCS = Animal.cpp Brain.cpp Cat.cpp Dog.cpp main.cpp
+OBJS = $(SRCS:.cpp=.o)
+# Compiler
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
-OBJ = $(SRC:.cpp=.o)
-TARGET = ex01
 
-all: $(TARGET)
+# Rules
+all: $(NAME)
 
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(NAME):	$(OBJS) 
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJS)
 
-fclean: clean
-	rm -f $(TARGET)
+fclean:	clean
+	$(RM) $(NAME)
 
-re: fclean all
+re:		fclean all
 
-.PHONY: all clean fclean re
+.PHONY:	all clean fclean re

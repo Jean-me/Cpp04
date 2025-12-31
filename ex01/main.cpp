@@ -6,11 +6,11 @@
 int main() {
     std::cout << "=== Creating array of Animals ===" << std::endl;
     const int arraySize = 4;
-    Animal* animals[arraySize];
+    const Animal* animals[arraySize];
 
     // Half Dogs, half Cats
     for (int i = 0; i < arraySize / 2; i++) {
-        animals[i] = new Dog();
+        animals[i] = new Dog();//BeainConがDogConよりも先に呼ばれる⇒コンストラクタ本体が実行される前に、すべてのメンバ変数が初期化されている必要がある
     }
     for (int i = arraySize / 2; i < arraySize; i++) {
         animals[i] = new Cat();
@@ -24,7 +24,7 @@ int main() {
 
     std::cout << "\n=== Deleting array ===" << std::endl;
     for (int i = 0; i < arraySize; i++) {
-        delete animals[i];
+        delete animals[i];//destructor呼ばれる
     }
 
     std::cout << "\n=== Testing deep copy ===" << std::endl;
@@ -33,18 +33,18 @@ int main() {
     dog1->getBrain()->setIdea(1, "I love bones!");
 
     std::cout << "\nCreating dog2 as a copy of dog1..." << std::endl;
-    Dog* dog2 = new Dog(*dog1);
+    Dog* dog2 = new Dog(*dog1);//これがDeepCopy、Dogのコピーコンを呼ぶｓ　…Shallow Copyの例；Dog dog2 = dog1;　
 
     std::cout << "\ndog1 ideas: " << dog1->getBrain()->getIdea(0) << std::endl;
     std::cout << "dog2 ideas: " << dog2->getBrain()->getIdea(0) << std::endl;
 
     std::cout << "\nChanging dog2's idea..." << std::endl;
-    dog2->getBrain()->setIdea(0, "I want to play fetch!");
+    dog2->getBrain()->setIdea(0, "PURIpuriPURI");//DeepCopyではメッセージが変わるはず。
 
-    std::cout << "dog1 ideas: " << dog1->getBrain()->getIdea(0) << std::endl;
-    std::cout << "dog2 ideas: " << dog2->getBrain()->getIdea(0) << std::endl;
+    std::cout << "dog1 ideas: " << dog1->getBrain()->getIdea(0) << std::endl;//I want to chase cats!
+    std::cout << "dog2 ideas: " << dog2->getBrain()->getIdea(0) << std::endl;//PURIpuriPURI
 
-    std::cout << "\nBrain addresses (should be different):" << std::endl;
+    std::cout << "\nBrain addresses (should be different):" << std::endl;//DeepCopyは各オブジェクトが独立したメモリ領域を持つためアドレスは違う。
     std::cout << "dog1 brain: " << dog1->getBrain() << std::endl;
     std::cout << "dog2 brain: " << dog2->getBrain() << std::endl;
 

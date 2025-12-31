@@ -1,23 +1,26 @@
+# Polymorphism
+NAME = ex00
+SRCS = Animal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp
+OBJS = $(SRCS:.cpp=.o)
+# Compiler
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
-OBJ = $(SRC:.cpp=.o)
-TARGET = ex00
 
-all: $(TARGET)
+# Rules
+all: $(NAME)
 
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(NAME):	$(OBJS) 
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJS)
 
-fclean: clean
-	rm -f $(TARGET)
+fclean:	clean
+	$(RM) $(NAME)
 
-re: fclean all
+re:		fclean all
 
-.PHONY: all clean fclean re
+.PHONY:	all clean fclean re
